@@ -1,6 +1,8 @@
 const express = require('express')
+const Change = require('../models/changeModel')
 
 const router = express.Router()
+
 
 // GET all changes
 router.get('/', (req, res) => {
@@ -13,8 +15,16 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new change
-router.post('/', (req, res) => {
-  res.json({mssg: 'POST a new change'})
+router.post('/', async (req, res) => {
+    
+    const {title, changes} = req.body
+    
+    try {
+        const change = await Change.create({title, changes})
+        res.status(200).json(change)
+    } catch (error) {
+        res.status(400).json({error: error.error.message })
+    }
 })
 
 // DELETE a change
