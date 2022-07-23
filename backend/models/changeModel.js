@@ -1,3 +1,5 @@
+// This is the schema to build each single change
+
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema
